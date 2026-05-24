@@ -1,10 +1,10 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import pool from "../config/db.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 // REGISTER
-export const register = async (req, res) => {
-  try {
+export const register = asyncHandler(async (req, res) => {
     const { name, email, password, role } = req.body;
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -20,14 +20,11 @@ export const register = async (req, res) => {
       message: "User registered successfully",
       user: result.rows[0],
     });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+});
 
 // LOGIN
-export const login = async (req, res) => {
-  try {
+export const login = asyncHandler(async (req, res) => {
+  
     const { email, password } = req.body;
 
     const userResult = await pool.query(
@@ -56,8 +53,11 @@ export const login = async (req, res) => {
     res.json({
       message: "Login successful",
       token,
+      user: {
+        id: user.id,
+        role: user.role,
+        name: user.name
+      }      
     });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+
+});

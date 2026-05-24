@@ -5,6 +5,13 @@ export const createPatient = async (req, res) => {
   try {
     const { name, age, gender, phone, address } = req.body;
 
+    // Backend form validation
+    if (!name || !age || !gender || !phone || !address) {
+      return res.status(400).json({
+        error: "All fields are required"
+      });
+    }
+
     const result = await pool.query(
       `INSERT INTO patients (name, age, gender, phone, address)
        VALUES ($1, $2, $3, $4, $5)

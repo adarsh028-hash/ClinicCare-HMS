@@ -2,11 +2,12 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
-import { verifyToken,authorizeRoles } from "./middleware/authMiddleware.js";
+import { verifyToken, authorizeRoles } from "./middleware/authMiddleware.js";
 import patientRoutes from "./routes/patientRoutes.js";
 import doctorRoutes from "./routes/doctorRoutes.js";
 import appointmentRoutes from "./routes/appointmentRoutes.js";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
+import profileRoutes from "./routes/profileRoutes.js";
 import { errorHandler } from "./middleware/errorMiddleware.js";
 
 dotenv.config();
@@ -15,20 +16,19 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-// app.use("/api/auth", authRoutes);
+
+// ROUTES
+app.use("/api/auth", authRoutes);
 app.use("/api/patients", patientRoutes);
 app.use("/api/doctors", doctorRoutes);
 app.use("/api/appointments", appointmentRoutes);
 app.use("/api/dashboard", dashboardRoutes);
-app.use(errorHandler);
+app.use("/api/profile", profileRoutes);
 
-
+// TEST ROUTES
 app.get("/", (req, res) => {
   res.send("ClinicCare HMS API is running...");
 });
-
-// CONNECT AUTH ROUTES
-app.use("/api/auth", authRoutes);
 
 app.get("/api/protected", verifyToken, (req, res) => {
   res.json({
@@ -45,6 +45,9 @@ app.get(
     res.json({ message: "Welcome Admin 👑" });
   }
 );
+
+// ERROR HANDLER 
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 

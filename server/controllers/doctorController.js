@@ -1,29 +1,34 @@
 import pool from "../config/db.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 // CREATE DOCTOR
-export const createDoctor = async (req, res) => {
-  try {
+export const createDoctor = asyncHandler(async (req, res) => {
 
-    const { name, specialization } = req.body;
+    const { name, specialization, phone, address} = req.body;
 
+    // Backend form validation
+    if (!name || !specialization || !phone || !address) {
+      return res.status(400).json({
+        error: "All fields are required"
+      });
+    }
+    
     const result = await pool.query(
-      `INSERT INTO doctors (name, specialization)
-       VALUES ($1, $2)
+      `INSERT INTO doctors (name, specialization, phone, address)
+       VALUES ($1, $2, $3, $4)
        RETURNING *`,
-      [name, specialization]
+      [name, specialization, phone, address]
     );
 
     res.status(201).json(result.rows[0]);
 
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+    next();
+});
 
 
 // GET ALL DOCTORS
-export const getDoctors = async (req, res) => {
-  try {
+export const getDoctors = asyncHandler(async (req, res) => {
+
 
     const result = await pool.query(
       "SELECT * FROM doctors ORDER BY id DESC"
@@ -31,39 +36,33 @@ export const getDoctors = async (req, res) => {
 
     res.json(result.rows);
 
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+    
+});
 
 
 // UPDATE DOCTOR
-export const updateDoctor = async (req, res) => {
-  try {
+export const updateDoctor = asyncHandler(async (req, res) => {
 
     const { id } = req.params;
-    const { name, specialization } = req.body;
+    const { name, specialization, phone, address } = req.body;
 
     const result = await pool.query(
       `UPDATE doctors
-       SET name=$1, specialization=$2
-       WHERE id=$3
+       SET name=$1, specialization=$2, phone=$3, address=$4 
+       WHERE id=$5
        RETURNING *`,
-      [name, specialization, id]
+      [name, specialization, phone, address, id]
     );
 
     res.json(result.rows[0]);
 
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+  
+});
 
 
 // DELETE DOCTOR
-export const deleteDoctor = async (req, res) => {
-  try {
-
+export const deleteDoctor = asyncHandler(async (req, res) => {
+  
     const { id } = req.params;
 
     await pool.query(
@@ -73,7 +72,5 @@ export const deleteDoctor = async (req, res) => {
 
     res.json({ message: "Doctor deleted successfully" });
 
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+  
+});

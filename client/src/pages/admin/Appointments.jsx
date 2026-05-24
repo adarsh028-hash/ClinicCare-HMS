@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import API from "../api/axios";
+import API from "../../api/axios";
 
 function Appointments() {
 
@@ -86,7 +86,7 @@ function Appointments() {
   };
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
+    <div className="p-6 bg-gray-100 min-h-screen mt-15">
 
       {/* 🔷 Header */}
       <div className="flex justify-between items-center mb-6">

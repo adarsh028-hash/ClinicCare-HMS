@@ -5,7 +5,11 @@ import { verifyToken, authorizeRoles } from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 // All logged-in users can view
-router.get("/", verifyToken, getAppointments);
+router.get(
+  "/", 
+  verifyToken, 
+  getAppointments
+);
 
 // ADMIN & RECEPTIONIST can create
 router.post(

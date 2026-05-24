@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import API from "../api/axios";
+import API from "../../api/axios";
 import { Link } from "react-router-dom";
+import {Stethoscope,Users,CalendarDays,CheckCircle} from "lucide-react";
 
 function Dashboard() {
 
@@ -41,15 +42,15 @@ function Dashboard() {
   }
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-
+    <div className="ml-0 pt-20 p-6 bg-gray-100 min-h-screen">
+    
       {/* 🔷 Header */}
-      <h2 className="text-3xl font-bold text-gray-800 mb-8">
+      {/* <h2 className="text-3xl font-bold text-gray-800 mb-8">
         Admin Dashboard
-      </h2>
+      </h2> */}
 
       {/* 📊 Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
         {/* Doctors */}
         <Link to="/doctors">

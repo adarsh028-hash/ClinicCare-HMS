@@ -1,5 +1,6 @@
 import pool from "../config/db.js";
 
+
 // CREATE APPOINTMENT
 export const createAppointment = async (req, res) => {
   try {

@@ -1,7 +1,7 @@
 import pool from "../config/db.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
-export const getDashboardStats = async (req, res) => {
-  try {
+export const getDashboardStats = asyncHandler (async (req, res) => {
 
     const totalPatients = await pool.query(
       "SELECT COUNT(*) FROM patients"
@@ -27,8 +27,4 @@ export const getDashboardStats = async (req, res) => {
       today_appointments: todayAppointments.rows[0].count,
       completed_appointments: completedAppointments.rows[0].count
     });
-
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+});
