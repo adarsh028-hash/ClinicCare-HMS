@@ -7,7 +7,12 @@
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
-  "keywords": ["nodejs", "express", "postgresql", "hospital-management-system"],
+  "keywords": [
+    "nodejs",
+    "express",
+    "postgresql",
+    "hospital-management-system"
+  ],
   "author": "BIRADAR ADARSH",
   "license": "ISC",
   "type": "module",

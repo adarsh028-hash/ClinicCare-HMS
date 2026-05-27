@@ -14,7 +14,10 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: "https://clinic-care-hms-client.vercel.app",
+  credentials: true
+}));
 app.use(express.json());
 
 // ROUTES
