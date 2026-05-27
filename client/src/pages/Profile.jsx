@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../api/axios";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -10,7 +10,7 @@ const Profile = () => {
     const fetchProfile = async () => {
       try {
         const res = await axios.get(
-        "http://localhost:5000/api/profile",
+        "/profile",
         {
             headers: {
             Authorization: `Bearer ${token}`,

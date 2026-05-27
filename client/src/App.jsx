@@ -7,7 +7,7 @@ import Patients from "./pages/admin/Patients";
 import Doctors from "./pages/admin/Doctors";
 import Appointments from "./pages/admin/Appointments";
 import DoctorSchedule from "./pages/admin/DoctorSchedule";
-import Profile from "./pages/Profile.jsx"
+import Profile from "./pages/Profile.jsx";
 
 import DoctorDashboard from "./pages/doctor/DoctorDashbord.jsx";
 import Layout from "./components/Layout";
