@@ -1,74 +1,155 @@
-# ClinicCare – Mini SaaS Hospital Management System
+# ClinicCare HMS – Full Stack Hospital Management System
 
-ClinicCare is a full-stack SaaS application designed for small clinics to manage patients, doctors, and appointments efficiently.
+ClinicCare HMS is a full-stack SaaS-based Hospital Management System developed for small clinics and healthcare centers to efficiently manage patients, doctors, and appointments.
+
+## Live Demo
+
+Frontend: https://clinic-care-hms-client.vercel.app
+
+---
+
+# Features
+
+* Secure JWT Authentication & Authorization
+* Doctor Management System
+* Patient Record Management
+* Appointment Scheduling System
+* Protected API Routes using Middleware
+* Responsive Dashboard UI
+* REST API Integration
+* Secure Password Hashing using bcrypt
+* Organized Client-Server Architecture
+
+---
 
 # Tech Stack
-- Frontend: React, HTML, CSS, JavaScript
-- Backend: Node.js, Express.js
-- Database: PostgreSQL
-- Authentication: JWT (JSON Web Tokens) & bcrypt 
 
-# Key Features
-- Secure user authentication (Login)
-- User signup (in progress)
-- Doctor management system
-- Patient record management
-- Appointment booking and scheduling
-- Organized dashboard for easy data access
-- REST APIs for seamless frontend-backend communication
+## Frontend
 
-# System Architecture
-- Client-server architecture using REST APIs
-- Token-based authentication using JWT
-- Secure password storage using bcrypt hashing
-- PostgreSQL used for structured relational data
+* React.js
+* Vite
+* JavaScript
+* HTML5
+* CSS3
+* Tailwind CSS
 
-# Structure of the Project 
+## Backend
+
+* Node.js
+* Express.js
+
+## Database
+
+* PostgreSQL (Hosted on Supabase)      
+
+## Authentication
+
+* JWT (JSON Web Tokens)
+* bcrypt.js
+
+## Deployment
+
+* Frontend: Vercel
+* Backend: Render
+* Database: Supabase
+
+---
+
+# Project Architecture
+
+Client → REST API → Express Server → PostgreSQL Database
+
+* Frontend communicates with backend using REST APIs
+* JWT used for secure authentication
+* Passwords securely hashed using bcrypt
+* PostgreSQL used for relational database management
+
+---
+
+# Folder Structure
+
+```bash
 ClinicCare-HMS/
 │
-├── client/ → Frontend (React + Vite)
-├── server/ → Backend (Node.js + Express)
+├── client/        # React Frontend
+├── server/        # Node.js + Express Backend
 └── README.md
+```
+
+---
 
 # Installation & Setup
 
-## Clone the repository
+## Clone Repository
 
+```bash
 git clone https://github.com/adarsh028-hash/ClinicCare-HMS.git
+```
 
-## Backend setup 
+---
 
+## Backend Setup
+
+```bash
 cd server
-    npm install
+npm install
+```
 
-    Create a .env file and add:
-    PORT=5000
-    DATABASE_URL=your_postgres_connection
-    JWT_SECRET=your_secret_key
+Create a `.env` file and add:
 
-Run backend:
+```env
+PORT=5000
+DATABASE_URL=your_database_url
+JWT_SECRET=your_secret_key
+```
+
+Run Backend:
+
+```bash
 npm run dev
+```
 
-## Frontend Setup 
+---
 
-    cd client
-    npm install
-    npm run dev
+## Frontend Setup
 
-# Demo Login 
+```bash
+cd client
+npm install
+npm run dev
+```
 
+---
+
+# Demo Credentials
+
+```txt
 Email: admin@test.com
 Password: 123456
+```
 
-# Future requirements to be improved 
+---
 
-- Billing & invoice system
-- Analytics dashboard
-- Notifications & reminders
-- Role-based access (Admin / Doctor / Staff)
-- Deployment (AWS / Vercel / Render)
+# Upcoming Enhancements
 
+* Billing & Invoice System
+* Analytics Dashboard
+* Notifications & Reminders
+* Advanced Role-Based Access
+* Search & Filter Features
+* Medical History Tracking
+
+---
 
 # Project Status
 
-Project is under development
+Actively improving with new SaaS features and scalability enhancements.
+
+---
+
+# Author
+
+Adarsh Biradar
+
+* GitHub: https://github.com/adarsh028-hash
+* LinkedIn: https://linkedin.com/in/adarsh-biradar-38a428338
