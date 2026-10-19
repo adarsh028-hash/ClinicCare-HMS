@@ -9,7 +9,7 @@ import Appointments from "./pages/admin/Appointments";
 import DoctorSchedule from "./pages/admin/DoctorSchedule";
 import Profile from "./pages/Profile.jsx";
 
-import DoctorDashboard from "./pages/doctor/DoctorDashbord.jsx";
+// import DoctorDashboard from "./pages/doctor/DoctorDashbord.jsx";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -26,7 +26,7 @@ function App() {
 
     {/* Pages WITH sidebar layout */}
 
-    <Route
+    {/* <Route
       path="/doctor/dashboard"
       element={
         <ProtectedRoute allowedRoles={["doctor"]}>
@@ -35,7 +35,7 @@ function App() {
           </Layout>
         </ProtectedRoute>
       }
-    />
+    /> */}
 
     <Route
       path="/dashboard"

@@ -1,5 +1,5 @@
 import express from "express";
-import {createAppointment,getAppointments,updateAppointmentStatus,getDoctorAppointments,getAppointmentsByDate} from "../controllers/appointmentController.js";
+import {createAppointment,getAppointments,updateAppointmentStatus,getDoctorAppointments,getAppointmentsByDate,updateAppointment,deleteAppointment} from "../controllers/appointmentController.js";
 import { verifyToken, authorizeRoles } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
@@ -40,5 +40,16 @@ router.get(
   verifyToken,
   getAppointmentsByDate
 );
+
+router.put(
+  "/:id",
+  verifyToken,
+  updateAppointment
+)
+
+router.delete(
+  "/:id", 
+  verifyToken, 
+  deleteAppointment);
 
 export default router;

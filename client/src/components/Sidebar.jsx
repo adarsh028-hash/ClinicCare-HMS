@@ -1,6 +1,6 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { LayoutDashboard, Users, User, Calendar, Clock } from "lucide-react";
-import logo from "../assets/public/logooo.png";
+import { LayoutDashboard, Users, User, Calendar, Clock,LogOut} from "lucide-react";
+import logo from "../assets/public/clinic_Logo.png";
 
   export const handleLogout = (navigate) => {
     sessionStorage.removeItem("token");
@@ -75,18 +75,10 @@ function Sidebar() {
       {/* Bottom */}
       <div>
         <button
-         onClick={() => handleLogout(navigate)}
-          className="
-            w-full
-            bg-red-500
-            text-white
-            py-2.5
-            rounded-xl
-            font-medium
-            transition-all duration-200
-            hover:bg-red-600
-            hover:shadow-md"
+          onClick={() => handleLogout(navigate)}
+          className="w-full flex items-center justify-center gap-2 bg-red-500 text-white py-2.5 rounded-xl font-medium transition-all duration-200 hover:bg-red-600 hover:shadow-md"
         >
+          <LogOut size={18} />
           Logout
         </button>
       </div>

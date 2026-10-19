@@ -15,7 +15,11 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-  origin: "https://clinic-care-hms-client.vercel.app",
+  
+  origin: [
+    "http://localhost:5173",
+    "https://clinic-care-hms-client.vercel.app",
+    ],
   credentials: true
 }));
 app.use(express.json());
@@ -29,25 +33,25 @@ app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/profile", profileRoutes);
 
 // TEST ROUTES
-app.get("/", (req, res) => {
-  res.send("ClinicCare HMS API is running...");
-});
+// app.get("/", (req, res) => {
+//   res.send("ClinicCare HMS API is running...");
+// });
 
-app.get("/api/protected", verifyToken, (req, res) => {
-  res.json({
-    message: "Protected route accessed successfully",
-    user: req.user
-  });
-});
+// app.get("/api/protected", verifyToken, (req, res) => {
+//   res.json({
+//     message: "Protected route accessed successfully",
+//     user: req.user
+//   });
+// });
 
-app.get(
-  "/api/admin-only",
-  verifyToken,
-  authorizeRoles("ADMIN"),
-  (req, res) => {
-    res.json({ message: "Welcome Admin 👑" });
-  }
-);
+// app.get(
+//   "/api/admin-only",
+//   verifyToken,
+//   authorizeRoles("ADMIN"),
+//   (req, res) => {
+//     res.json({ message: "Welcome Admin 👑" });
+//   }
+// );
 
 // ERROR HANDLER 
 app.use(errorHandler);

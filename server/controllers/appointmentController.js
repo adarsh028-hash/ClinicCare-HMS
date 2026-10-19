@@ -1,9 +1,9 @@
 import pool from "../config/db.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 
 // CREATE APPOINTMENT
-export const createAppointment = async (req, res) => {
-  try {
+export const createAppointment = asyncHandler(async(req, res)=> {
     const { patient_id, doctor_id, appointment_date, appointment_time } = req.body;
 
     // Check if patient exists
@@ -46,14 +46,10 @@ export const createAppointment = async (req, res) => {
 
     res.status(201).json(result.rows[0]);
 
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+});
 
 // GET ALL APPOINTMENTS
-export const getAppointments = async (req, res) => {
-  try {
+export const getAppointments = asyncHandler(async(req, res)=>{
     const result = await pool.query(`
       SELECT a.*, 
              p.name AS patient_name,
@@ -65,15 +61,10 @@ export const getAppointments = async (req, res) => {
     `);
 
     res.json(result.rows);
-
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+});
 
 // UPDATE APPOINTMENT STATUS
-export const updateAppointmentStatus = async (req, res) => {
-  try {
+export const updateAppointmentStatus = asyncHandler(async(req, res)=>{
     const { id } = req.params;
     const { status } = req.body;
 
@@ -100,15 +91,10 @@ export const updateAppointmentStatus = async (req, res) => {
     }
 
     res.json(result.rows[0]);
-
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+});
 
 // GET APPOINTMENTS FOR LOGGED-IN DOCTOR
-export const getDoctorAppointments = async (req, res) => {
-  try {
+export const getDoctorAppointments = asyncHandler(async(req, res)=>{
 
     const doctorId = req.query.id;
 
@@ -122,15 +108,10 @@ export const getDoctorAppointments = async (req, res) => {
     `, [doctorId]);
 
     res.json(result.rows);
-
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+});
 
 // FILTER APPOINTMENTS BY DATE
-export const getAppointmentsByDate = async (req, res) => {
-  try {
+export const getAppointmentsByDate = asyncHandler(async(req, res)=>{
     const { date } = req.query;
 
     const result = await pool.query(`
@@ -144,8 +125,60 @@ export const getAppointmentsByDate = async (req, res) => {
     `, [date]);
 
     res.json(result.rows);
+});
 
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+// Delete Appointment
+export const deleteAppointment = asyncHandler(async(req,res)=>{
+
+  const {id} = req.params;
+  const result = await pool.query(
+    `DELETE FROM appointments
+    WHERE id = 1
+    RETURNING*`,
+    [id]
+  );
+
+  if (result.rows.length ===0){
+    return res.status(404).json({
+      message:"Appointment not found",
+    });
   }
-};
+  res.json({
+    message: "Appointment deleted successfully",
+  })
+});
+
+export const updateAppointment = asyncHandler(async(req,res)=>{
+
+  const{id} = req.params;
+  const{patient_id,doctor_i,dappointment_date, appointment_time} = req.body;
+
+  const result = await pool.query(
+    `UPDATE appointments
+    SET patient_id= $1,
+        doctor_id = $2,
+        appointment_date = $3,
+        appointment_time = $4,
+        status = $5
+        WHERE id = $6
+        RETURNING *`,
+
+        [
+          patient_id,
+          doctor_id,
+          appointment_date,
+          appointment_time,
+          status,
+          id,
+        ]
+  );
+
+  if(result.roe.length ===0){
+    return res.status(404).json({
+      message: "Appointment not found",
+    })
+  }
+
+  res.json(result.rows[0]);
+
+})
